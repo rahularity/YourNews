@@ -30,6 +30,7 @@ public interface Api {
     @GET("{headline_type}")
     Call<News> getSearchedNews(
             @Path("headline_type") String headline_type,
+            @Query("sources") String sources,
             @Query("q") String keyword,
             @Query("from") String date,
             @Query("sortBy") String filter,

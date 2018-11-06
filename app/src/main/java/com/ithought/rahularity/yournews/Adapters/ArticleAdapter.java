@@ -1,4 +1,4 @@
-package com.ithought.rahularity.yournews;
+package com.ithought.rahularity.yournews.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ithought.rahularity.yournews.Models.Article;
+import com.ithought.rahularity.yournews.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterNewsActivity">
+
+
+    <TextView
+        android:id="@+id/heading_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="News Search"
+        android:textColor="#555555"
+        android:textSize="22sp" />
+
+    <ImageButton
+        android:id="@+id/sources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/heading_label"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/ic_filter"
+        android:background="#80ffffff"/>
+
+    <EditText
+        android:id="@+id/search_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/heading_label"
+        android:layout_below="@+id/heading_label"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_toStartOf="@+id/search_btn"
+        android:background="@drawable/search_layout"
+        android:ems="10"
+        android:fontFamily="@font/nunito_semibold"
+        android:hint="Search here"
+        android:inputType="textCapWords"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:textColor="#999999"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/search_field"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/search_field"
+        android:layout_marginRight="30dp"
+        android:background="@android:color/background_light"
+        app:srcCompat="@mipmap/search_button" />
+
+
+
+
+        <HorizontalScrollView
+            android:id="@+id/source_filter"
+            android:layout_below="@id/search_field"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/ABC"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ABC News"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+
+                <TextView
+                    android:id="@+id/BBC"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BBC News"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+
+                <TextView
+                    android:id="@+id/hindu"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The Hindu"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/CBS"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CBS News"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/CNBC"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CNBC"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/google_news"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Google News"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/CNN"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CNN"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/TOI"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The Times of India"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:id="@+id/ESPN"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ESPN"
+                    android:background="@drawable/filter_background_not_selected"
+                    android:textColor="#ffffff"/>
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/source_filter"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp">
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+
+        <TextView
+            android:id="@+id/instruction_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_centerInParent="true"
+            android:textAlignment="center"
+            android:textColor="#444444"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="The news related to your keyword and filter will be shown here."
+            android:textSize="24sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/result_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <!--bottom navigation-->
+    <include layout="@layout/layout_bottom_navigation_view"/>
+
+</RelativeLayout>

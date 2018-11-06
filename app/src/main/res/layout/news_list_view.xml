@@ -35,9 +35,9 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:fontFamily="@font/nunito_semibold"
-                android:textColor="#000"
+                android:textColor="#333333"
                 android:layout_gravity="center"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textAlignment="center"
                 android:text="Mayweather to face Japan kickboxer Nasukawa on New Year's Eve"/>
 
@@ -46,8 +46,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
+                android:textColor="#777777"
                 android:layout_gravity="center"
                 android:textStyle="normal"
+                android:textSize="18sp"
                 android:fontFamily="sans-serif-condensed"
                 android:textAlignment="center"
                 android:text="'The Walking Dead' leading man Rick Grimes and the actor who plays him, Andrew Lincoln, made their final series appearance in Sunday's episode. But he'll be back in a series on TV films."/>

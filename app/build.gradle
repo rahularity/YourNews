@@ -44,6 +44,13 @@ dependencies {
     //Picasso Image loader
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Bottom Navigation View
+    //Bottom navigation view ex library
+    implementation 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+
+    //location
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
