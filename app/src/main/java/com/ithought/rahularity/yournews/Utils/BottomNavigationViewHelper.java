@@ -7,8 +7,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.MenuItem;
 import com.ithought.rahularity.yournews.R;
-import com.ithought.rahularity.yournews.FilterNewsActivity;
+import com.ithought.rahularity.yournews.FilterNews.FilterNewsActivity;
 import com.ithought.rahularity.yournews.Home.HomeActivity;
+import com.ithought.rahularity.yournews.Settings.SettingsActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class BottomNavigationViewHelper {
@@ -39,8 +40,8 @@ public class BottomNavigationViewHelper {
                         break;
 
                     case R.id.ic_bookmark:
-//                        Intent intent3 = new Intent(context, MissingChildrenListActivity.class);
-//                        context.startActivity(intent3);
+                        Intent intent3 = new Intent(context, SettingsActivity.class);
+                        context.startActivity(intent3);
                         break;
 
                 }

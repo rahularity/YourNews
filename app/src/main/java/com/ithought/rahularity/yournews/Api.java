@@ -12,13 +12,6 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @FormUrlEncoded
-    @POST("compare/")
-    Call<News> compare(
-            @Field("image") String image
-
-    );
-
     @GET("{headline_type}")
     Call<News> getNews(
             @Path("headline_type") String headline_type,
@@ -36,7 +29,6 @@ public interface Api {
             @Query("sortBy") String filter,
             @Query("apiKey") String apiKey
     );
-
 
 
 }

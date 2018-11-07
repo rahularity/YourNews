@@ -1,4 +1,4 @@
-package com.ithought.rahularity.yournews;
+package com.ithought.rahularity.yournews.FilterNews;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +17,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.ithought.rahularity.yournews.Adapters.ArticleAdapter;
-import com.ithought.rahularity.yournews.Home.HomeActivity;
 import com.ithought.rahularity.yournews.Models.Article;
 import com.ithought.rahularity.yournews.Models.News;
+import com.ithought.rahularity.yournews.R;
+import com.ithought.rahularity.yournews.RetrofitClient;
 import com.ithought.rahularity.yournews.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -36,13 +38,14 @@ public class FilterNewsActivity extends AppCompatActivity {
     private Context context = this;
     private ProgressBar progress;
     private EditText searchText;
-    private ImageButton searchBtn,filter;
+    private ImageButton searchBtn;
     private RecyclerView resultList;
-    private TextView instructionText;
+    private TextView instructionText, info;
     private TextView ABC,BBC,HINDU,CBS,CNBC,GOOGLE,CNN,TOI,ESPN;
     private static final String ApiKey = "c2130699553c41a9b1089d35ba2faa0e";
     private ArrayList<String> sourceList;
     private String keywords = "";
+    public static String date = "2018-11-01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +57,32 @@ public class FilterNewsActivity extends AppCompatActivity {
         setupBottomNavigationView(); //setting up bottom navigation view
         init(); //initialising all the private data members at one place
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                keywords = searchText.getText().toString().trim();
-                if (keywords.isEmpty())
-                    inputValidation(searchText,"Type a keyword to filter your news");
-                else
-                    gettingNewsFromKeywords();
-            }
+        searchBtn.setOnClickListener(view -> {
+            keywords = searchText.getText().toString().trim();
+            if (keywords.isEmpty())
+                inputValidation(searchText,"Type a keyword to filter your news");
+            else
+                gettingNewsFromKeywords();
         }); //GET request on the API for getting all the latest news searched according to the keyword.
 
+
+        searchText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (i == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    keywords = searchText.getText().toString().trim();
+                    if (keywords.isEmpty())
+                        inputValidation(searchText,"Type a keyword to filter your news");
+                    else
+                        gettingNewsFromKeywords();
+                    Toast.makeText(FilterNewsActivity.this, searchText.getText(), Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+            }
+        });
         sourceFilterClicks();
 
 
@@ -164,9 +182,9 @@ public class FilterNewsActivity extends AppCompatActivity {
             progress.setVisibility(View.VISIBLE);
             instructionText.setVisibility(View.GONE);
             Call<News> call = RetrofitClient
-                    .getInstance()
+                    .getInstance(context)
                     .getApi()
-                    .getSearchedNews("everything",sources,keywords,"2018-11-01","popularity",ApiKey); //getting top-headlines from India
+                    .getSearchedNews("everything",sources,keywords,date,"popularity",ApiKey); //getting top-headlines from India
 
             enqueueCall(call);
 
@@ -191,6 +209,8 @@ public class FilterNewsActivity extends AppCompatActivity {
                         List<Article> articles= response.body().getArticles();
                         resultList.setAdapter(new ArticleAdapter(articles,R.layout.news_list_view,getApplicationContext()));
                         progress.setVisibility(View.GONE);
+                        info.setText("These news are fetched from " + date + " and sorted by popularity and selected news source.");
+                        info.setVisibility(View.VISIBLE);
 
                     }
 
@@ -198,7 +218,8 @@ public class FilterNewsActivity extends AppCompatActivity {
                     //TODO: when there is nothing to fetch from the API
                     progress.setVisibility(View.GONE);
                     instructionText.setVisibility(View.VISIBLE);
-                    Toast.makeText(context, "There are no news in the database", Toast.LENGTH_LONG).show();
+                    info.setVisibility(View.GONE);
+                    Toast.makeText(context, "Something went wrong...please try again.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -207,7 +228,7 @@ public class FilterNewsActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: something went wrong." + t.getMessage());
                 progress.setVisibility(View.GONE);
                 instructionText.setVisibility(View.VISIBLE);
-                Toast.makeText(FilterNewsActivity.this,"Something went wrong...please try again.",Toast.LENGTH_LONG).show();
+                Toast.makeText(FilterNewsActivity.this,"Check your Internet Connectivity and try again.",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -230,7 +251,9 @@ public class FilterNewsActivity extends AppCompatActivity {
         searchBtn = (ImageButton)findViewById(R.id.search_btn);
         resultList = (RecyclerView)findViewById(R.id.result_list);
         resultList.setLayoutManager(new LinearLayoutManager(context));
-        filter = (ImageButton)findViewById(R.id.sources);
+        info = findViewById(R.id.search_info);
+
+
     }
 
     /**

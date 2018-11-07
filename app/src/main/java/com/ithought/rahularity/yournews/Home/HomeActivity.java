@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
     private Geocoder geocoder;
-    private List<Address> addresses;
+    public static List<Address> addresses;
 
     private static final String TAG = "HomeActivity";
     public static final int ACTIVITY_NUM = 0;
@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView instructionText;
     private TextView locationText;
     private static final String ApiKey = "c2130699553c41a9b1089d35ba2faa0e";
-    private String city,state,country,address;
+    public static String city,state,country,address, knownName, postalCode;
     private HashMap<String, String> country_map;
 
     @Override
@@ -93,41 +93,38 @@ public class HomeActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(HomeActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
             mFusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
+                    .addOnSuccessListener(this, location -> {
 
-                            Log.d(TAG, "onSuccess: getting location now");
-                            // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                // Logic to handle location object
-                                Log.d(TAG, "onSuccess: location latitude is "+ location.getLatitude());
-                                Double latitude = location.getLatitude();
-                                Double longitude = location.getLongitude();
+                        Log.d(TAG, "onSuccess: getting location now");
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            Log.d(TAG, "onSuccess: location latitude is "+ location.getLatitude());
+                            Double latitude = location.getLatitude();
+                            Double longitude = location.getLongitude();
 
-                                try {
-                                    addresses = geocoder.getFromLocation( latitude, longitude, 1);
-                                    address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                                    city = addresses.get(0).getLocality();
-                                    state = addresses.get(0).getAdminArea();
-                                    country = addresses.get(0).getCountryName();
-                                    //String postalCode = addresses.get(0).getPostalCode();
-                                    //String knownName = addresses.get(0).getFeatureName();
+                            try {
+                                addresses = geocoder.getFromLocation( latitude, longitude, 1);
+                                address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                                city = addresses.get(0).getLocality();
+                                state = addresses.get(0).getAdminArea();
+                                country = addresses.get(0).getCountryName();
+                                postalCode = addresses.get(0).getPostalCode();
+                                knownName = addresses.get(0).getFeatureName();
 
-                                    Log.d(TAG, "onSuccess: country is " + country);
+                                Log.d(TAG, "onSuccess: country is " + country);
 
-                                    //locationText.setText(city + ", " + state + ", " + country);
-                                    locationText.setText(address);
-                                    fetchingNews(); //GET request on the API for getting all the latest news location wise.
+                                //locationText.setText(city + ", " + state + ", " + country);
+                                locationText.setText(address);
+                                fetchingNews(); //GET request on the API for getting all the latest news location wise.
 
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }else{
-                                Toast.makeText(context,"unable to fetch your location at this time", Toast.LENGTH_LONG).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
+
+
+                        }else{
+                            Toast.makeText(context,"unable to fetch your location at this time", Toast.LENGTH_LONG).show();
                         }
                     });
         }else{
@@ -190,12 +187,14 @@ public class HomeActivity extends AppCompatActivity {
     private void fetchingNews() {
         progress.setVisibility(View.VISIBLE);
         instructionText.setVisibility(View.GONE);
-        Call<News> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .getNews("top-headlines",country_map.get(country), ApiKey); //getting top-headlines from India
 
-        Log.d(TAG, "fetchingNews: country code is " + country_map.get(country));
+        String country_code = country_map.get(country);
+        Call<News> call = RetrofitClient
+                .getInstance(this)
+                .getApi()
+                .getNews("top-headlines",country_code, ApiKey); //getting top-headlines from India
+
+        Log.d(TAG, "fetchingNews: country code is " + country_code);
 
         enqueueCall(call);
     }
@@ -225,7 +224,7 @@ public class HomeActivity extends AppCompatActivity {
                     //TODO: when there is nothing to fetch from the API
                     progress.setVisibility(View.GONE);
                     instructionText.setVisibility(View.VISIBLE);
-                    Toast.makeText(context, "There are no news.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Something went wrong...please try again.", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -234,7 +233,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.e(TAG, "onFailure: something went wrong." + t.getMessage());
                 progress.setVisibility(View.GONE);
                 instructionText.setVisibility(View.VISIBLE);
-                Toast.makeText(HomeActivity.this,"Something went wrong...please try again.",Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeActivity.this,"Please check your Internet connection.",Toast.LENGTH_LONG).show();
             }
         });
     }

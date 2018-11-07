@@ -14,9 +14,10 @@
             android:id="@+id/news_pic"
             android:layout_width="match_parent"
             android:src="@color/cardview_shadow_end_color"
-            android:layout_height="200dp"/>
+            android:layout_height="220dp"/>
 
         <LinearLayout
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -27,7 +28,15 @@
                 android:layout_height="wrap_content"
                 android:text="2018-11-05"
                 android:textStyle="bold"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="20dp"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018-11-05"
+                android:textStyle="bold"
+                android:layout_marginStart="20dp"/>
 
             <TextView
                 android:id="@+id/title"
@@ -37,7 +46,9 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:textColor="#333333"
                 android:layout_gravity="center"
-                android:textSize="20sp"
+                android:textSize="19sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:textAlignment="center"
                 android:text="Mayweather to face Japan kickboxer Nasukawa on New Year's Eve"/>
 
@@ -45,14 +56,42 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:padding="5dp"
                 android:textColor="#777777"
                 android:layout_gravity="center"
                 android:textStyle="normal"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:fontFamily="sans-serif-condensed"
                 android:textAlignment="center"
                 android:text="'The Walking Dead' leading man Rick Grimes and the actor who plays him, Andrew Lincoln, made their final series appearance in Sunday's episode. But he'll be back in a series on TV films."/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/url"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:textColor="#333333"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:text="See full story: "/>
+
+            </RelativeLayout>
+
+
 
 
 

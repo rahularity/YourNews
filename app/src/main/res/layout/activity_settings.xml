@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings.SettingsActivity">
+
+    <TextView
+        android:id="@+id/heading_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="Settings"
+        android:textColor="#555555"
+        android:textSize="23sp" />
+
+    <Button
+        android:id="@+id/save"
+        android:text="Save"
+        android:background="@drawable/button_background"
+        android:textColor="#ffffff"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_below="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/date_heading"
+        android:layout_below="@id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="18sp"
+        android:textColor="#444444"
+        android:textStyle="bold"
+        android:text="Select a date after which you want your news: "/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_heading"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/comfortaa"
+        android:text="Select a date"
+        android:textColor="#0000EE"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_below="@id/date"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:background="?android:attr/listDivider" />
+
+
+    <TextView
+        android:layout_below="@+id/divider2"
+        android:id="@+id/about_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:text="About"
+        android:textColor="#555555"
+        android:textSize="23sp" />
+
+
+    <TextView
+        android:id="@+id/country_heading"
+        android:layout_below="@+id/about_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="18sp"
+        android:textColor="#444444"
+        android:textStyle="bold"
+        android:text="Your Current Location"/>
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_below="@+id/country_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_below="@id/date_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:textColor="#555555"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Full Address:"/>
+
+            <TextView
+                android:layout_below="@id/date_heading"
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:textColor="#0000EE"
+                android:textSize="16sp"
+                android:text="Select a date"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:background="?android:attr/listDivider" />
+
+    <!--bottom navigation-->
+    <include layout="@layout/layout_bottom_navigation_view"/>
+
+
+
+</RelativeLayout>

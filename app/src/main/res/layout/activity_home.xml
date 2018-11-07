@@ -16,7 +16,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/nunito_semibold"
-        android:text="Latest News From Your Location"
+        android:text="News from your country"
         android:textColor="#555555"
         android:textSize="22sp" />
 
@@ -48,7 +48,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/current_location"
+        android:layout_below="@+id/location_text"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp">
 

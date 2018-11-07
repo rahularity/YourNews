@@ -3,6 +3,8 @@ package com.ithought.rahularity.yournews.Adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     @NonNull
     @Override
     public ArticleAdapter.ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(layout,parent ,false);
         return new ArticleViewHolder(view);
     }
@@ -40,7 +43,18 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     public void onBindViewHolder(@NonNull ArticleAdapter.ArticleViewHolder holder, int position) {
         holder.title.setText(articles.get(position).getTitle());
         holder.description.setText(articles.get(position).getDescription());
-        holder.date.setText(articles.get(position).getPublishedAt());
+
+        String dateAndTime = articles.get(position).getPublishedAt();
+        String date_text = "Date: " + dateAndTime.substring(0,10);
+        String time_text = "Time: " + dateAndTime.substring(11,19);
+
+        holder.date.setText(date_text);
+        holder.time.setText(time_text);
+
+        String newsUrl = articles.get(position).getUrl();
+        holder.link.setText(Html.fromHtml("<a href=\"" + newsUrl + "\">" + "See full story..."));
+        holder.link.setClickable(true);
+        holder.link.setMovementMethod(LinkMovementMethod.getInstance());
 
         String url = articles.get(position).getUrlToImage();
         Log.d(TAG, "onBindViewHolder: url link is "+ url);
@@ -60,7 +74,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         ImageView newsImage;
         TextView title;
         TextView date;
-        TextView description;
+        TextView description,time,link;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +82,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             title = (TextView)itemView.findViewById(R.id.title);
             description = (TextView)itemView.findViewById(R.id.description);
             date = (TextView)itemView.findViewById(R.id.date);
+            time = itemView.findViewById(R.id.time);
+            link = itemView.findViewById(R.id.url);
         }
     }
 }
